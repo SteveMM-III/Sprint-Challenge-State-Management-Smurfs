@@ -1,8 +1,30 @@
 import React from 'react';
 import uuid from 'uuid';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
-import { ADD, addSmurf } from '../actions';
+import { addSmurf } from '../actions';
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 0 12px black;
+
+  button {
+    margin: 5px 0;
+    align-self: center;
+    width: 100px;
+  }
+`;
+
+const StyledLabel = styled.label`
+  width: 200px;
+  align-self: center;
+  padding: 5px;
+`;
+
 
 class SmurfForm extends React.Component {
   constructor() {
@@ -38,8 +60,8 @@ class SmurfForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <label>
+      <StyledForm onSubmit={ this.handleSubmit }>
+        <StyledLabel>
           Name
           <input
             type="text"
@@ -48,8 +70,8 @@ class SmurfForm extends React.Component {
             value={ this.state.newSmurf.name }
             onChange={ this.handleNameChange }
           />
-        </label>
-        <label>
+        </StyledLabel>
+        <StyledLabel>
           Age
           <input
             type="number"
@@ -58,8 +80,8 @@ class SmurfForm extends React.Component {
             value={ this.state.newSmurf.age }
             onChange={ this.handleAgeChange }
           />
-        </label>
-        <label>
+        </StyledLabel>
+        <StyledLabel>
           Height
           <input
             type="text"
@@ -68,9 +90,9 @@ class SmurfForm extends React.Component {
             value={ this.state.newSmurf.height }
             onChange={ this.handleHeightChange }
           />
-        </label>
+        </StyledLabel>
         <button>Add</button>
-      </form>
+      </StyledForm>
     );
   }
 }
