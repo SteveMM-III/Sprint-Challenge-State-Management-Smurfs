@@ -1,29 +1,29 @@
 import axios from 'axios';
 
-export const FETCH_SMURF_LOADING = 'FETCH_SMURF_LOADING';
-export const FETCH_SMURF_SUCCESS = 'FETCH_SMURF_SUCCESS';
-export const FETCH_SMURF_FAILED  = 'FETCH_SMURF_FAILED';
+export const FETCH_SMURFS_LOADING = 'FETCH_SMURFS_LOADING';
+export const FETCH_SMURFS_SUCCESS = 'FETCH_SMURFS_SUCCESS';
+export const FETCH_SMURFS_FAILED  = 'FETCH_SMURFS_FAILED';
 
-export const smurfLoading = () => ( { type: FETCH_SMURF_LOADING } );
+export const smurfsLoading = () => ( { type: FETCH_SMURFS_LOADING } );
 
-export const smurfLoadSuccess = data => ( {
-  type: FETCH_SMURF_SUCCESS,
+export const smurfsLoadSuccess = data => ( {
+  type: FETCH_SMURFS_SUCCESS,
   payload: data
 } );
 
-export const smurfLoadFailure = error => ( {
-  type: FETCH_SMURF_FAILED,
+export const smurfsLoadFailure = error => ( {
+  type: FETCH_SMURFS_FAILED,
   payload: error
 } );
 
-export function fetchSmurf() {
+export function fetchSmurfs() {
   return function( dispatch ) {
-    dispatch( smurfLoading() );
+    dispatch( smurfsLoading() );
 
     return axios
-      .get( 'http://localhost:3333' )
-      .then( res => console.log( res ) )
-      /* .then( res => dispatch( smurfLoadSuccess( res.data ) ) ) */
-      .catch( error => dispatch( smurfLoadFailure( error ) ) );
+      .get( 'http://localhost:3333/smurfs' )
+      // .then( res => console.log( res ) )
+      .then ( res   => dispatch( smurfsLoadSuccess( res.data ) ) )
+      .catch( error => dispatch( smurfsLoadFailure( error    ) ) );
   }
 }
