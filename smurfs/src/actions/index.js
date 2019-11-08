@@ -24,6 +24,11 @@ export const smurfAddSuccess = data => ( {
   payload: data
 } );
 
+export const smurfAddFailure = error => ( {
+  type: ADD_FAILED,
+  payload: error
+} );
+
 export function fetchSmurfs() {
   return function( dispatch ) {
     dispatch( smurfsLoading() );
@@ -39,8 +44,8 @@ export function fetchSmurfs() {
 export function addSmurf( smurf ) {
   return function( dispatch ) {
     return axios
-      .post()
-      .then()
-      .catch();
+      .post( 'http://localhost:3333/smurfs', smurf )
+      .then( res => dispatch( smurfAddSuccess( smurf ) ) )
+      .catch( error => dispatch( smurfAddFailure( error ) ) );
   }
 }
