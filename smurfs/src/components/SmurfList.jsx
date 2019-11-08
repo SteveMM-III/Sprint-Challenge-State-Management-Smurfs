@@ -7,7 +7,14 @@ import Smurf from './Smurf';
 
 const SmurfList = props => {
 
-  useEffect( () => { props.dispatch( fetchSmurfs() ); }, [] );
+  const dispatch = props.dispatch;
+  
+  useEffect( () => { 
+    async function getSmurfs() {
+      await dispatch( fetchSmurfs() );
+    }
+    getSmurfs();
+  }, [dispatch] );
 
   return (
     <div>
