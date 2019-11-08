@@ -1,4 +1,4 @@
-import { FETCH_SMURFS_LOADING, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILED } from '../actions';
+import { FETCH_SMURFS_LOADING, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILED, ADD, ADD_FAILED } from '../actions';
 
 export const initialState = {
   smurfs: [],
@@ -26,6 +26,16 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         smurfs: [],
         isFetching: false,
+        error: action.payload
+      }
+    case ADD:
+      return {
+        ...state,
+        smurfs: [ ...state.smurfs, action.payload ]
+      }
+    case ADD_FAILED:
+      return {
+        ...state,
         error: action.payload
       }
     default:
